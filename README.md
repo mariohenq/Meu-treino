@@ -223,14 +223,11 @@
     grid-template-columns: 40px 1fr;
     align-items: stretch;
     flex: 1;
-    text-decoration: none;
-    color: inherit;
     transition: border-color 0.18s, opacity 0.3s;
     height: 80px;
     max-height: 80px;
-    -webkit-touch-callout: none;
   }
-  .exercise-card:active { opacity: 0.75; }
+  .exercise-card:hover { border-color: #444; }
 
   .ex-wrapper.done .exercise-card {
     opacity: 0.38;
@@ -264,10 +261,15 @@
   .ex-name {
     font-weight: 600;
     font-size: 0.88rem;
-    color: var(--text);
+    color: var(--accent);
     line-height: 1.25;
-    transition: color 0.2s;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .ex-name:active { opacity: 0.7; }
 
 
   .ex-meta { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -319,34 +321,139 @@
   }
   .reset-btn:active { border-color: var(--accent2); color: var(--accent2); }
 
-  /* ── INSTALL BANNER (iOS) ── */
-  .install-banner {
-    background: rgba(232,255,58,0.08);
-    border: 1px solid rgba(232,255,58,0.18);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin: 0 12px 14px;
-    font-size: 0.72rem;
-    color: var(--text);
-    line-height: 1.5;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+  /* ── IMPORTAR CSV ── */
+  .csv-section {
+    margin: 0 12px calc(16px + var(--safe-bot));
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
   }
-  .install-banner .icon { font-size: 1.4rem; flex-shrink: 0; }
-  .install-banner strong { color: var(--accent); display: block; margin-bottom: 2px; }
-  .install-banner .close-btn {
-    margin-left: auto;
+  .csv-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .csv-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    flex: 1;
+  }
+  .csv-help-btn {
+    background: none;
+    border: 1px solid #333;
+    color: var(--muted);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .csv-help-btn:active { border-color: var(--accent); color: var(--accent); }
+
+  /* balão de ajuda */
+  .csv-tooltip {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    width: 280px;
+    background: #1e1e1e;
+    border: 1px solid rgba(232,255,58,0.25);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.7rem;
+    color: var(--text);
+    line-height: 1.6;
+    z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .csv-tooltip.open { display: block; }
+  .csv-tooltip strong { color: var(--accent); }
+  .csv-tooltip code {
+    display: block;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 8px 0;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: #aaa;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .csv-tooltip ul { padding-left: 14px; margin-top: 4px; }
+  .csv-tooltip li { margin-bottom: 3px; }
+  .csv-tooltip .close-tip {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    color: var(--muted);
+    font-size: 0.65rem;
+    cursor: pointer;
     background: none;
     border: none;
-    color: var(--muted);
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0 0 0 8px;
-    flex-shrink: 0;
     font-family: inherit;
   }
-  .install-banner.hidden { display: none; }
+
+  .csv-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .csv-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    background: #111;
+    border: 1px dashed #333;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .csv-label:active { border-color: var(--accent); }
+  .csv-label input { display: none; }
+  .csv-label span { color: var(--text); font-weight: 600; }
+  .csv-import-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .csv-import-btn:active { opacity: 0.8; }
+  .csv-status {
+    margin-top: 8px;
+    font-size: 0.68rem;
+    color: var(--muted);
+    min-height: 16px;
+  }
+  .csv-status.ok { color: var(--green); }
+  .csv-status.err { color: var(--accent2); }
 </style>
 </head>
 <body>
@@ -375,17 +482,8 @@
   </div>
 </div>
 
-<!-- iOS install hint -->
-<div class="install-banner" id="installBanner">
-  <span class="icon">📲</span>
-  <div>
-    <strong>Adicionar à tela inicial</strong>
-    Toque em <b>Compartilhar</b> (□↑) no Safari e depois em <b>"Adicionar à Tela de Início"</b> para usar como app offline.
-  </div>
-  <button class="close-btn" onclick="document.getElementById('installBanner').classList.add('hidden');localStorage.setItem('bannerDismissed','1')">✕</button>
-</div>
-
 <div class="content">
+
 
 <!-- ===== FICHA A ===== -->
 <section class="ficha visible" id="fichaA">
@@ -394,163 +492,141 @@
     <div class="ficha-info">
       <div class="subtitle">Ficha A · Superior 1</div>
       <h2>PEITO + COSTAS + BRAÇOS</h2>
-      <div class="groups">11 exercícios · toque para ver no Google Imagens</div>
+      <div class="groups">11 exercícios · toque no nome para ver no Google Imagens</div>
     </div>
   </div>
   <div class="exercise-list">
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.03s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=supino+reto+barra+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">1</div>
         <div class="ex-body">
-          <div class="ex-name">Supino Reto Barra</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=supino+reto+barra+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Supino Reto Barra</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Peitoral maior · Deltóide ant. · Tríceps</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.06s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=supino+inclinado+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">2</div>
         <div class="ex-body">
-          <div class="ex-name">Supino Inclinado Halteres</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=supino+inclinado+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Supino Inclinado Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Peitoral superior · Deltóide ant. · Tríceps</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.09s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=crucifixo+reto+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">3</div>
         <div class="ex-body">
-          <div class="ex-name">Crucifixo Reto com Halteres</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=crucifixo+reto+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Crucifixo Reto com Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Peitoral maior · Deltóide anterior</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.12s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=puxada+aberta+neutra+costas+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">4</div>
         <div class="ex-body">
-          <div class="ex-name">Puxada Aberta Neutra</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=puxada+aberta+neutra+costas+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Puxada Aberta Neutra</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Latíssimo · Rombóides · Bíceps</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.15s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=remada+curvada+pronada+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">5</div>
         <div class="ex-body">
-          <div class="ex-name">Remada Curvada Pronada Halteres</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=remada+curvada+pronada+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Remada Curvada Pronada Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Latíssimo · Trapézio · Rombóides · Bíceps</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.18s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=remada+baixa+tri%C3%A2ngulo+polia+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">6</div>
         <div class="ex-body">
-          <div class="ex-name">Remada Baixa Triângulo</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=remada+baixa+tri%C3%A2ngulo+polia+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Remada Baixa Triângulo</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Latíssimo · Trapézio · Rombóides</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.21s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=tr%C3%ADceps+franc%C3%AAs+halter+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">7</div>
         <div class="ex-body">
-          <div class="ex-name">Tríceps Francês com Halter</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=tr%C3%ADceps+franc%C3%AAs+halter+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Tríceps Francês com Halter</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Tríceps braquial (cabeça longa)</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.24s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=tr%C3%ADceps+corda+polia+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">8</div>
         <div class="ex-body">
-          <div class="ex-name">Tríceps Corda Polia</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=tr%C3%ADceps+corda+polia+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Tríceps Corda Polia</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Tríceps braquial (todas as cabeças)</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.27s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=rosca+alternada+halteres+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">9</div>
         <div class="ex-body">
-          <div class="ex-name">Rosca Alternada com Halteres</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=rosca+alternada+halteres+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Rosca Alternada com Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Bíceps braquial · Braquial · Braquiorradial</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.30s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=rosca+martelo+halteres+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">10</div>
         <div class="ex-body">
-          <div class="ex-name">Rosca Martelo</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=rosca+martelo+halteres+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Rosca Martelo</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Braquiorradial · Bíceps · Braquial</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="A" style="animation-delay:.33s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=abdominal+supra+polia+alta+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">11</div>
         <div class="ex-body">
-          <div class="ex-name">Abdominal Supra Polia Alta</div>
-          
+          <a class="ex-name" href="https://www.google.com/search?q=abdominal+supra+polia+alta+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Abdominal Supra Polia Alta</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">15 Reps</span></div>
           <div class="ex-muscles">Reto abdominal superior · Oblíquos</div>
         </div>
-        
-      </a>
+      </div>
     </div>
 
   </div>
@@ -567,129 +643,129 @@
     <div class="ficha-info">
       <div class="subtitle">Ficha B · Inferior</div>
       <h2>PERNA COMPLETA + GLÚTEO</h2>
-      <div class="groups">10 exercícios · toque para ver no Google Imagens</div>
+      <div class="groups">10 exercícios · toque no nome para ver no Google Imagens</div>
     </div>
   </div>
   <div class="exercise-list">
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.03s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=leg+press+45+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">1</div>
         <div class="ex-body">
-          <div class="ex-name">Leg Press 45°</div>
+          <a class="ex-name" href="https://www.google.com/search?q=leg+press+45+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Leg Press 45°</a>
           <div class="ex-meta"><span class="ex-tag">4 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Quadríceps · Glúteo máximo · Isquiotibiais</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.06s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=afundo+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">2</div>
         <div class="ex-body">
-          <div class="ex-name">Afundo com Halteres</div>
+          <a class="ex-name" href="https://www.google.com/search?q=afundo+halteres+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Afundo com Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Quadríceps · Glúteo máximo · Isquiotibiais</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.09s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=cadeira+extensora+quadric%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">3</div>
         <div class="ex-body">
-          <div class="ex-name">Extensora (Cadeira)</div>
+          <a class="ex-name" href="https://www.google.com/search?q=cadeira+extensora+quadric%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Extensora (Cadeira)</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Quadríceps (reto femoral, vastos)</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.12s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=levantamento+terra+m%C3%A1quina+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">4</div>
         <div class="ex-body">
-          <div class="ex-name">Levantamento Terra Máquina</div>
+          <a class="ex-name" href="https://www.google.com/search?q=levantamento+terra+m%C3%A1quina+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Levantamento Terra Máquina</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Isquiotibiais · Glúteo máximo · Eretores</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.15s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=stiff+barra+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">5</div>
         <div class="ex-body">
-          <div class="ex-name">Stiff Barra</div>
+          <a class="ex-name" href="https://www.google.com/search?q=stiff+barra+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Stiff Barra</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Isquiotibiais · Glúteo máximo · Lombares</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.18s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=cadeira+abdutora+gl%C3%BAteo+m%C3%A9dio+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">6</div>
         <div class="ex-body">
-          <div class="ex-name">Abdutor (Máquina)</div>
+          <a class="ex-name" href="https://www.google.com/search?q=cadeira+abdutora+gl%C3%BAteo+m%C3%A9dio+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Abdutor (Máquina)</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">12 Reps</span></div>
           <div class="ex-muscles">Glúteo médio · Glúteo mínimo · TFL</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.21s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=hip+thrust+eleva%C3%A7%C3%A3o+quadril+barra+gl%C3%BAteo&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">7</div>
         <div class="ex-body">
-          <div class="ex-name">Elevação de Quadril Barra (Hip Thrust)</div>
+          <a class="ex-name" href="https://www.google.com/search?q=hip+thrust+eleva%C3%A7%C3%A3o+quadril+barra+gl%C3%BAteo&tbm=isch" target="_blank" rel="noopener">Elevação de Quadril Barra (Hip Thrust)</a>
           <div class="ex-meta"><span class="ex-tag">4 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Glúteo máximo · Isquiotibiais · Abdutores</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.24s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=abdu%C3%A7%C3%A3o+quadril+p%C3%A9+polia+baixa&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">8</div>
         <div class="ex-body">
-          <div class="ex-name">Abdução em Pé na Polia Baixa</div>
+          <a class="ex-name" href="https://www.google.com/search?q=abdu%C3%A7%C3%A3o+quadril+p%C3%A9+polia+baixa&tbm=isch" target="_blank" rel="noopener">Abdução em Pé na Polia Baixa</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">12 Reps</span></div>
           <div class="ex-muscles">Glúteo médio · Glúteo mínimo · TFL</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.27s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=panturrilha+em+p%C3%A9+m%C3%A1quina+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">9</div>
         <div class="ex-body">
-          <div class="ex-name">Panturrilha em Pé Máquina</div>
+          <a class="ex-name" href="https://www.google.com/search?q=panturrilha+em+p%C3%A9+m%C3%A1quina+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Panturrilha em Pé Máquina</a>
           <div class="ex-meta"><span class="ex-tag">4 Séries</span><span class="ex-tag rep">12 Reps</span></div>
           <div class="ex-muscles">Gastrocnêmio · Sóleo</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="B" style="animation-delay:.30s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=abdominal+infra+paralela+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">10</div>
         <div class="ex-body">
-          <div class="ex-name">Abdominal Infra Paralela</div>
+          <a class="ex-name" href="https://www.google.com/search?q=abdominal+infra+paralela+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Abdominal Infra Paralela</a>
           <div class="ex-meta"><span class="ex-tag">4 Séries</span><span class="ex-tag rep">20 Reps</span></div>
           <div class="ex-muscles">Reto abdominal inferior · Iliopsoas</div>
         </div>
-      </a>
+      </div>
     </div>
 
   </div>
@@ -706,141 +782,141 @@
     <div class="ficha-info">
       <div class="subtitle">Ficha C · Superior 2</div>
       <h2>OMBRO + COSTAS + BRAÇOS</h2>
-      <div class="groups">11 exercícios · toque para ver no Google Imagens</div>
+      <div class="groups">11 exercícios · toque no nome para ver no Google Imagens</div>
     </div>
   </div>
   <div class="exercise-list">
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.03s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=desenvolvimento+halteres+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">1</div>
         <div class="ex-body">
-          <div class="ex-name">Desenvolvimento Halteres</div>
+          <a class="ex-name" href="https://www.google.com/search?q=desenvolvimento+halteres+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Desenvolvimento Halteres</a>
           <div class="ex-meta"><span class="ex-tag">4 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Deltóide ant./médio · Trapézio · Tríceps</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.06s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=eleva%C3%A7%C3%A3o+lateral+halteres+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">2</div>
         <div class="ex-body">
-          <div class="ex-name">Elevação Lateral Halteres</div>
+          <a class="ex-name" href="https://www.google.com/search?q=eleva%C3%A7%C3%A3o+lateral+halteres+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Elevação Lateral Halteres</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Deltóide médio · Supraspinal · Trapézio sup.</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.09s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=eleva%C3%A7%C3%A3o+lateral+inclinada+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">3</div>
         <div class="ex-body">
-          <div class="ex-name">Elevação Lateral Inclinada</div>
+          <a class="ex-name" href="https://www.google.com/search?q=eleva%C3%A7%C3%A3o+lateral+inclinada+ombro+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Elevação Lateral Inclinada</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Deltóide médio (amplitude maior)</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.12s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=crucifixo+inverso+ombro+delt%C3%B3ide+posterior+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">4</div>
         <div class="ex-body">
-          <div class="ex-name">Crucifixo Inverso</div>
+          <a class="ex-name" href="https://www.google.com/search?q=crucifixo+inverso+ombro+delt%C3%B3ide+posterior+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Crucifixo Inverso</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">12 Reps</span></div>
           <div class="ex-muscles">Deltóide posterior · Rombóides · Trapézio</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.15s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=puxada+fechada+supinada+costas+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">5</div>
         <div class="ex-body">
-          <div class="ex-name">Puxada Fechada Supinada</div>
+          <a class="ex-name" href="https://www.google.com/search?q=puxada+fechada+supinada+costas+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Puxada Fechada Supinada</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Latíssimo · Bíceps · Rombóides</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.18s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=remada+cavalinho+T-bar+row+costas+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">6</div>
         <div class="ex-body">
-          <div class="ex-name">Remada Cavalinho (T-Bar Row)</div>
+          <a class="ex-name" href="https://www.google.com/search?q=remada+cavalinho+T-bar+row+costas+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Remada Cavalinho (T-Bar Row)</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">8 Reps</span></div>
           <div class="ex-muscles">Latíssimo · Rombóides · Trapézio · Bíceps</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.21s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=tr%C3%ADceps+testa+barra+W+skull+crusher+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">7</div>
         <div class="ex-body">
-          <div class="ex-name">Tríceps Testa Barra W</div>
+          <a class="ex-name" href="https://www.google.com/search?q=tr%C3%ADceps+testa+barra+W+skull+crusher+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Tríceps Testa Barra W</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Tríceps braquial (cabeça longa e medial)</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.24s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=mergulho+paralelas+tr%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">8</div>
         <div class="ex-body">
-          <div class="ex-name">Mergulho Máquina / Paralelas</div>
+          <a class="ex-name" href="https://www.google.com/search?q=mergulho+paralelas+tr%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Mergulho Máquina / Paralelas</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Tríceps · Peitoral inferior · Deltóide ant.</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.27s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=rosca+scott+b%C3%ADceps+preacher+curl+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">9</div>
         <div class="ex-body">
-          <div class="ex-name">Rosca Scott</div>
+          <a class="ex-name" href="https://www.google.com/search?q=rosca+scott+b%C3%ADceps+preacher+curl+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Rosca Scott</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Bíceps braquial (cabeça curta) · Braquial</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.30s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=rosca+direta+barra+W+EZ+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">10</div>
         <div class="ex-body">
-          <div class="ex-name">Rosca Direta Barra W</div>
+          <a class="ex-name" href="https://www.google.com/search?q=rosca+direta+barra+W+EZ+b%C3%ADceps+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Rosca Direta Barra W</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">10 Reps</span></div>
           <div class="ex-muscles">Bíceps braquial · Braquial · Braquiorradial</div>
         </div>
-      </a>
+      </div>
     </div>
 
     <div class="ex-wrapper" data-f="C" style="animation-delay:.33s">
       <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
-      <a class="exercise-card" href="https://www.google.com/search?q=face+pull+polia+ombro+delt%C3%B3ide+posterior+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">
+      <div class="exercise-card">
         <div class="ex-num">11</div>
         <div class="ex-body">
-          <div class="ex-name">Face Pull</div>
+          <a class="ex-name" href="https://www.google.com/search?q=face+pull+polia+ombro+delt%C3%B3ide+posterior+muscula%C3%A7%C3%A3o&tbm=isch" target="_blank" rel="noopener">Face Pull</a>
           <div class="ex-meta"><span class="ex-tag">3 Séries</span><span class="ex-tag rep">12 Reps</span></div>
           <div class="ex-muscles">Deltóide posterior · Manguito rotador · Trapézio</div>
         </div>
-      </a>
+      </div>
     </div>
 
   </div>
@@ -849,16 +925,55 @@
     <button class="reset-btn" onclick="resetFicha('C')">↺ Resetar</button>
   </div>
 </section>
-
 </div><!-- /content -->
 
-<script>
-  // Hide banner if dismissed
-  if (localStorage.getItem('bannerDismissed')) {
-    document.getElementById('installBanner').classList.add('hidden');
-  }
+<!-- IMPORTAR CSV -->
+<div class="csv-section">
+  <div class="csv-title-row">
+    <div class="csv-title">📂 Importar Treino (CSV)</div>
+    <div style="position:relative">
+      <button class="csv-help-btn" onclick="toggleTooltip()">?</button>
+      <div class="csv-tooltip" id="csvTooltip">
+        <strong>Como montar seu CSV</strong>
+        <p>O arquivo deve ter <strong>5 colunas</strong> nessa ordem:</p>
+        <code>ficha,exercicio,series,reps,musculos</code>
+        <strong>Exemplo:</strong>
+        <code>A,Supino Reto Barra,3,8,Peitoral · Tríceps
+A,Crucifixo,3,10,Peitoral
+B,Leg Press 45°,4,8,Quadríceps
+C,Desenvolvimento,4,8,Deltóide</code>
+        <strong>Regras:</strong>
+        <ul>
+          <li><strong>ficha</strong>: A, B ou C</li>
+          <li><strong>exercicio</strong>: nome do exercício</li>
+          <li><strong>series</strong>: número (ex: 3)</li>
+          <li><strong>reps</strong>: número (ex: 10)</li>
+          <li><strong>musculos</strong>: texto livre</li>
+          <li>Primeira linha = cabeçalho (ignorada)</li>
+          <li>Separador: vírgula</li>
+          <li>Salve como .csv (UTF-8)</li>
+          <li>Ao clicar no exercício abre Google Imagens automaticamente</li>
+        </ul>
+        <button class="close-tip" onclick="toggleTooltip()">✕ Fechar</button>
+      </div>
+    </div>
+  </div>
+  <div class="csv-row">
+    <label class="csv-label">
+      <input type="file" accept=".csv" id="csvFile" onchange="onFileChosen(this)">
+      📄 <span id="csvFileName">Escolher arquivo .csv</span>
+    </label>
+    <button class="csv-import-btn" onclick="importCSV()">Importar</button>
+  </div>
+  <div class="csv-status" id="csvStatus"></div>
+</div>
 
-  // Register Service Worker for offline
+<footer style="text-align:center; padding: 20px 16px calc(20px + var(--safe-bot)); font-size:0.68rem; color:#444; letter-spacing:0.06em;">
+  Desenvolvido por <a href="https://www.instagram.com/mariohenq" target="_blank" rel="noopener" style="color:#666; text-decoration:none;">@mariohenq</a>
+</footer>
+
+<script>
+  // Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
@@ -882,11 +997,10 @@
 
   function updateProgress() {
     const s = document.getElementById('ficha' + activeTab);
-    const all   = s.querySelectorAll('.ex-checkbox');
-    const done  = s.querySelectorAll('.ex-checkbox:checked').length;
+    const all  = s.querySelectorAll('.ex-checkbox');
+    const done = s.querySelectorAll('.ex-checkbox:checked').length;
     const total = all.length;
-    const pct   = total > 0 ? Math.round((done / total) * 100) : 0;
-
+    const pct  = total > 0 ? Math.round((done / total) * 100) : 0;
     document.getElementById('progressFill').style.width = pct + '%';
     document.getElementById('progressCount').textContent = done + ' / ' + total;
     document.getElementById('progressLabel').textContent =
@@ -901,8 +1015,88 @@
     updateProgress();
   }
 
+  // ── TOOLTIP ──
+  function toggleTooltip() {
+    document.getElementById('csvTooltip').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const tip = document.getElementById('csvTooltip');
+    if (!tip.contains(e.target) && !e.target.classList.contains('csv-help-btn')) {
+      tip.classList.remove('open');
+    }
+  });
+
+  // ── CSV ──
+  function onFileChosen(input) {
+    const name = input.files[0] ? input.files[0].name : 'Escolher arquivo .csv';
+    document.getElementById('csvFileName').textContent = name;
+    document.getElementById('csvStatus').textContent = '';
+    document.getElementById('csvStatus').className = 'csv-status';
+  }
+
+  function importCSV() {
+    const file = document.getElementById('csvFile').files[0];
+    const status = document.getElementById('csvStatus');
+    if (!file) {
+      status.textContent = '⚠️ Selecione um arquivo CSV primeiro.';
+      status.className = 'csv-status err';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const lines = e.target.result.split(/\r?\n/).filter(l => l.trim());
+        const rows = lines.slice(1); // pula cabeçalho
+        if (!rows.length) throw new Error('Arquivo vazio ou sem dados.');
+
+        // Limpa fichas existentes
+        ['A','B','C'].forEach(f => {
+          const list = document.querySelector('#ficha' + f + ' .exercise-list');
+          if (list) list.innerHTML = '';
+        });
+
+        let counts = {A:0, B:0, C:0};
+        rows.forEach((line, idx) => {
+          const cols = line.split(',');
+          if (cols.length < 4) return;
+          const [ficha, exercicio, series, reps, musculos=''] = cols.map(c => c.trim());
+          const f = ficha.toUpperCase();
+          if (!['A','B','C'].includes(f)) return;
+          counts[f]++;
+          const list = document.querySelector('#ficha' + f + ' .exercise-list');
+          if (!list) return;
+          const delay = (counts[f] * 0.03).toFixed(2);
+          const href = `https://www.google.com/search?q=${encodeURIComponent(exercicio)}+muscula%C3%A7%C3%A3o&tbm=isch`;
+          const wrapper = document.createElement('div');
+          wrapper.className = 'ex-wrapper';
+          wrapper.dataset.f = f;
+          wrapper.style.animationDelay = delay + 's';
+          wrapper.innerHTML = `
+            <div class="ex-check-col"><input type="checkbox" class="ex-checkbox" onchange="toggleDone(this)"></div>
+            <div class="exercise-card">
+              <div class="ex-num">${counts[f]}</div>
+              <div class="ex-body">
+                <a class="ex-name" href="${href}" target="_blank" rel="noopener">${exercicio}</a>
+                <div class="ex-meta"><span class="ex-tag">${series} Séries</span><span class="ex-tag rep">${reps} Reps</span></div>
+                <div class="ex-muscles">${musculos}</div>
+              </div>
+            </div>`;
+          list.appendChild(wrapper);
+        });
+
+        const total = counts.A + counts.B + counts.C;
+        status.textContent = `✅ ${total} exercícios importados (A:${counts.A} B:${counts.B} C:${counts.C})`;
+        status.className = 'csv-status ok';
+        updateProgress();
+      } catch(err) {
+        status.textContent = '❌ Erro ao ler CSV: ' + err.message;
+        status.className = 'csv-status err';
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
   updateProgress();
 </script>
-
 </body>
 </html>
