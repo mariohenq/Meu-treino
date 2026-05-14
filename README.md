@@ -5,13 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Treino">
+<meta name="apple-mobile-web-app-title" content="💪 Treino">
 <meta name="theme-color" content="#0a0a0a">
 <title>Ficha de Treino</title>
-<link rel="manifest" href="./manifest.json">
 
-<!-- Apple touch icon inline SVG via data URI -->
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAADdgAAA3YBfdWCzAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMeSURBVHic7cExAQAAAMKg9U9tDB+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAABHgAAAABJRU5ErkJggg==">
+<!-- Manifest inline via blob (sem arquivo externo) -->
+<script>
+(function(){
+  const manifest = {
+    name: "💪 Ficha de Treino",
+    short_name: "Treino",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#0a0a0a",
+    theme_color: "#0a0a0a",
+    icons: [{
+      src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADhklEQVR42u3d0W0bMRAE0P2+ktJ/MekiqSBBAFu5ndk3UAHm8ImEeZQ0j8gXMioQgAQgAUgAEgFIABKABCARgAQgAUgAEgFIABKAgvLz1w8lAPRHHN/1AoiYHzwB9Caam5iGG5IAWu2mW9JwQ9JpQKF0ahgNOhidA1RGJ5rRoIPRCUBH6MQxGnQwagZ0XM9+Q4MORoWAcEkxNOhg1AMIjjhDQw9DDYCACDU09DAUDIiAdEZDD0ORgEx5h6Ghh6EwQKa5ydDQwxBAn50MgLYAqqz7uKG5qccYwwBde1/eGe9caPPyYWk8II8bu0uoBfTsC0AZlT27U9bJNDX15KSmnB5AT1oAokdLnwGEzp26sgE9LQGInqO9pQJ6GgMQPecKzAP0tOcuIHoONpkE6LmUc4DouWkoA9BzNVcA0XPWEEAAvQ2InsuGVgNCZ3/JewFBE9HzWH4sQoWAcElpGyCA3gNED0MAAdQFCJGs2sfyA9BXmh/LD0MAAQQQQKcA0cMQQAABBBBA9OwxBBBACYDsX3YxgAAqAoRC7i4GEEAAAQSQAAQQQAABBBBAAAlAAAEEEEDfD4gehqxA9NjCBCCAAAIIIIAAAggggAQggAACCCCAAPKpDAmZCIAA+u+A7GL2L4AA8u0c9AAEEEAAAcQQPb5kEyCAAAKIoUw9LwCyCFl+Hr/WQw9AAMUCYui4HoAAKgXEUErVfjfe8vN0AmIoouTVgBja3/DUj5Cej3YLEEALADF0U08MoJuGIiqdawOm53vLTAJ0x1BQk3N25PQcBdRtKK7AUQE9FwH1GQrtbXRBz11AHYai65qCUnIZFbQ02qEHoDxDNeVMWU37GZV1MpV97WRUWUUtoFWMikuY+vreZVQ/9jnS43+WdGe8c63TjzZ7YYyvAdrW73cVXTmopYDW1v33mUj8mwHyAoihA/9yvgCIoaYDi3cAMVRz3PUaIIY6DkvfBMRQwVH7y4AwSn/YtwIQQ7mPircAYij0osEiQAwl3nbaBYihuLty6wBhlHXNcikghlLueu8FhFHExwS2A2Jo+ewEADrLKGJeYgCdYhQ0I2GA6hnFzUUkoEpGobMQDKiGUXT/8YCiGRU0XwIoS1JT4W2ANkuq7LkW0B5J3fX2A3oF051KbwH6nKezHZ4G9I/IlACQACQACUAiAAlAApAAJACpQAASgAQgAUgEIAFIUvIbCTV6QOKXRSQAAAAASUVORK5CYII=",
+      sizes: "192x192",
+      type: "image/png",
+      purpose: "any maskable"
+    }]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/manifest+json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = url;
+  document.currentScript.after(link);
+})();
+</script>
+
+<!-- Apple touch icon real (PNG 192x192) -->
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADhklEQVR42u3d0W0bMRAE0P2+ktJ/MekiqSBBAFu5ndk3UAHm8ImEeZQ0j8gXMioQgAQgAUgAEgFIABKABCARgAQgAUgAEgFIABKAgvLz1w8lAPRHHN/1AoiYHzwB9Caam5iGG5IAWu2mW9JwQ9JpQKF0ahgNOhidA1RGJ5rRoIPRCUBH6MQxGnQwagZ0XM9+Q4MORoWAcEkxNOhg1AMIjjhDQw9DDYCACDU09DAUDIiAdEZDD0ORgEx5h6Ghh6EwQKa5ydDQwxBAn50MgLYAqqz7uKG5qccYwwBde1/eGe9caPPyYWk8II8bu0uoBfTsC0AZlT27U9bJNDX15KSmnB5AT1oAokdLnwGEzp26sgE9LQGInqO9pQJ6GgMQPecKzAP0tOcuIHoONpkE6LmUc4DouWkoA9BzNVcA0XPWEEAAvQ2InsuGVgNCZ3/JewFBE9HzWH4sQoWAcElpGyCA3gNED0MAAdQFCJGs2sfyA9BXmh/LD0MAAQQQQKcA0cMQQAABBBBA9OwxBBBACYDsX3YxgAAqAoRC7i4GEEAAAQSQAAQQQAABBBBAAAlAAAEEEEDfD4gehqxA9NjCBCCAAAIIIIAAAggggAQggAACCCCAAPKpDAmZCIAA+u+A7GL2L4AA8u0c9AAEEEAAAcQQPb5kEyCAAAKIoUw9LwCyCFl+Hr/WQw9AAMUCYui4HoAAKgXEUErVfjfe8vN0AmIoouTVgBja3/DUj5Cej3YLEEALADF0U08MoJuGIiqdawOm53vLTAJ0x1BQk3N25PQcBdRtKK7AUQE9FwH1GQrtbXRBz11AHYai65qCUnIZFbQ02qEHoDxDNeVMWU37GZV1MpV97WRUWUUtoFWMikuY+vreZVQ/9jnS43+WdGe8c63TjzZ7YYyvAdrW73cVXTmopYDW1v33mUj8mwHyAoihA/9yvgCIoaYDi3cAMVRz3PUaIIY6DkvfBMRQwVH7y4AwSn/YtwIQQ7mPircAYij0osEiQAwl3nbaBYihuLty6wBhlHXNcikghlLueu8FhFHExwS2A2Jo+ewEADrLKGJeYgCdYhQ0I2GA6hnFzUUkoEpGobMQDKiGUXT/8YCiGRU0XwIoS1JT4W2ANkuq7LkW0B5J3fX2A3oF051KbwH6nKezHZ4G9I/IlACQACQACUAiAAlAApAAJACpQAASgAQgAUgEIAFIUvIbCTV6QOKXRSQAAAAASUVORK5CYII=">
 
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -973,10 +998,7 @@ C,Desenvolvimento,4,8,Deltóide</code>
 </footer>
 
 <script>
-  // Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
+  // Service Worker removido (arquivo externo não disponível no GitHub Pages single-file)
 
   let activeTab = 'A';
 
